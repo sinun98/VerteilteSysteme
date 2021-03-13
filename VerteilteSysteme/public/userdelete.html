@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="user.css">
+    <link href="fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Useroberfläche</title>
+</head>
+
+<body onload="checkaccessdelete()">
+
+    <!--Navbar -->
+    <nav id="navbar" class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+        <a class="navbar-brand" href="#">DHBW-Stuttgart</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="nav navbar-nav navbar-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="calendar.html">Kalender</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="user.html">Termin anlegen
+            
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="useredit.html">Termin bearbeiten</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="userdelete.html">Termin löschen<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="useroverview.html">Gesamtübersicht</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="userweekoverview.html">Spezifischeübersicht</a>
+                </li>
+               
+                
+            </ul>
+
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                
+                <span id="username" class="navbar-text white-text"></span>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                      aria-labelledby="navbarDropdownMenuLink-333">
+                      <a class="dropdown-item" href="" data-toggle="modal" data-target="#deletefenster">Konto löschen</a>
+                      <a class="dropdown-item" href="" data-toggle="modal" data-target="#changepassword">Passwort ändern</a>
+                      <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutfenster">Abmelden</a>
+                      
+                    </div>
+                  </li>
+               
+            </ul>
+        
+        </div>
+    </nav>
+    <!--/.Navbar -->
+
+    <div id=box>
+        <!-- Termin löschen-->
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="termindelete-box" class="col-md-12">
+                        <form id="getvorlesungvalues">
+                            <div class="form">
+                                <h2 class="text-center text-info">Termin löschen</h2>
+                                <label for="terminselect" class="text-info">Termin auswählen:</label>
+                                <select class="form-control" id="terminselect" style="border-color:black">
+
+                                </select>
+
+                                </select>
+
+                                <small id="vorlesungalert" class="form-text text-muted"></small>
+                            </div>
+                            <br>
+                            
+
+                            <button type="button" id="delete" class="btn btn-info btn-md" data-toggle="modal" data-target="#allertinfo" onclick="deleteterminfunktion();">Löschen</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal Abmelden-->
+    <div class="modal fade" id="logoutfenster" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Abmelden</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <p>Sicher, dass Sie sich abmelden wollen?</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="logout" href="javascript:;" onclick="abmelden();" class="btn btn-danger btn-block">Jetzt Abmelden</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal  Passwort ändern-->
+    <div class="modal fade" id="changepassword" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Passwort ändern</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form">
+    
+                            <label for="passwordold" class="text-info">Altes Passwort:</label>
+                            <input type="password" class="form-control" id="passwordold" name="passwordold" style="border-color:black">
+                            <small id="passwordoldalert" class="form-text text-muted"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Neues Passwort:</label>
+                            <input type="password" class="form-control" id="passwordnew" style="border-color:black">
+                            <small id=passwordnewalert class="form-text text-muted"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordnewwdh" class="text-info">Neues Passwort wdh.:</label>
+                            <input type="password" class="form-control" id="passwordnewwdh" style="border-color:black">
+                            <small id=passwordnewwdhalert class="form-text text-muted"></small>
+                        </div>
+                    </form>
+                    <p class="text-success" id="successlog"></p>
+                </div>
+                <div class="modal-footer">
+                    <a id="changepw" href="javascript:;" onclick="changepw();" class="btn btn-danger btn-block">Passwort ändern</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modal Error Nachricht-->
+    <div class="modal fade" id="allertinfo" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="alertheader">Modal Header</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <p id="alerttext"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Modal Konto löschen -->
+    <div class="modal fade" id="deletefenster" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Konto löschen</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <p>Sicher, dass Sie ihr Konto löschen wollen?</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="deletekonto" href="javascript:;" onclick="deletekonto();" class="btn btn-danger btn-block">Jetzt löschen</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script language="javascript" type="text/javascript" src="mainuser.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
